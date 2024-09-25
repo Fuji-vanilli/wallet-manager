@@ -1,0 +1,20 @@
+server:
+  port: 7010
+
+spring:
+  application:
+    name: wallet-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/WALLET-DB
+    username: root
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5Dialect
+          format_sql: true
+    show-sql: true
