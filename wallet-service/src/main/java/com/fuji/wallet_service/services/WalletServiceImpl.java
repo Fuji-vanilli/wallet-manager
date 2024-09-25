@@ -1,6 +1,7 @@
 package com.fuji.wallet_service.services;
 
 import com.fuji.wallet_service.entities.Currency;
+import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.repositories.CurrencyRepository;
 import com.fuji.wallet_service.repositories.WalletRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,10 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -44,5 +48,22 @@ public class WalletServiceImpl implements WalletService {
         } catch (IOException e) {
             throw new RuntimeException(String.format("Error to load the file csv %s", path.getFileName()));
         }
+
+        log.info("data loaded and add to the database successfully");
+
+        Stream.of("AR", "USD", "CAD", "EUR", "DIN").forEach(currencyCode-> {
+            Currency currency= currencyRepository.findById(currencyCode).orElseThrow(
+                    ()-> new IllegalArgumentException(String.format("currency %s doesn't exist", currencyCode))
+            );
+
+            Wallet.builder()
+                    .id(UUID.randomUUID().toString())
+                    .currency(currency)
+                    .amount(new BigDecimal(5000))
+                    .createdAt(new Date())
+                    .userID("USER_X")
+                    .build();
+        });
+
     }
 }
