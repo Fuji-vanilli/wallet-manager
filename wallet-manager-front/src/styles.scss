@@ -2,3 +2,37 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+:root {
+    --primary-100:#00C16A;
+    --primary-200:#00DC82;
+    --primary-300:#75EDAE;
+    --primary-100-opacity: rgba(#2E8B57, 0.5);
+    --primary-100-gradient: radial-gradient(circle at -1% 57.5%, rgb(19, 170, 82) 0%, rgb(0, 102, 43) 90%);
+    --accent-100:#8FBC8F;
+    --accent-200:#345e37;
+    --text-100:#FFFFFF;
+    --text-200:#94A3B8;
+    --text-300: #b3b3b3;
+    --bg-100:#0F172A;
+    --bg-300:#1E293B;
+    --bg-200:#334155;
+    --bg-400: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+    --delete-100:#FF3D3D;
+    --special-100: #2196F3;
+    --special-200: #6A00FF;
+    --special-300: rgb(175 82 222);
+  
+    --green-50: #EFFDF5;
+    --green-100: #D9FBE8;
+    --green-200: #B3F5D1;
+    --green-300: #75EDAE;
+    --green-400: #00DC82;
+    --green-500: #00C16A;
+    --green-600: #00A155;
+    --green-700: #007F45;
+    --green-800: #016538;
+    --green-900: #0A5331;
+    --green-950: #052e16;
+      
+  }

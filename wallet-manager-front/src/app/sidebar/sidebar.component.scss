@@ -1,0 +1,14 @@
+#sidebar {
+    min-height: 100vh; /* Hauteur de la sidebar pour remplir tout l'écran */
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .sidebar .nav-link.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
