@@ -20,7 +20,7 @@ import java.util.List;
 public class Wallet {
     @Id
     private String id;
-    private BigDecimal amount;
+    private BigDecimal balance;
     private Date createdAt;
     private String userID;
     @ManyToOne

@@ -1,9 +1,11 @@
 package com.fuji.wallet_service.services;
 
+import com.fuji.wallet_service.dto.WalletResponse;
 import com.fuji.wallet_service.entities.Currency;
 import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.entities.WalletTransaction;
 import com.fuji.wallet_service.enums.TransactionType;
+import com.fuji.wallet_service.mapper.WalletMapper;
 import com.fuji.wallet_service.repositories.CurrencyRepository;
 import com.fuji.wallet_service.repositories.WalletRepository;
 import com.fuji.wallet_service.repositories.WalletTransactionRepository;
@@ -27,6 +29,7 @@ public class WalletServiceImpl implements WalletService {
     private final WalletRepository walletRepository;
     private final CurrencyRepository currencyRepository;
     private final WalletTransactionRepository walletTransactionRepository;
+    private final WalletMapper walletMapper;
 
     @Override
     public void loadCurrencies() {
@@ -62,7 +65,7 @@ public class WalletServiceImpl implements WalletService {
             Wallet wallet= Wallet.builder()
                     .id(UUID.randomUUID().toString())
                     .currency(currency)
-                    .amount(new BigDecimal(random.nextInt(5000, 15000)))
+                    .balance(new BigDecimal(random.nextInt(5000, 15000)))
                     .createdAt(new Date())
                     .userID("USER_X")
                     .build();
@@ -80,7 +83,7 @@ public class WalletServiceImpl implements WalletService {
                         .wallet(wallet)
                         .build();
                 walletTransactionRepository.save(debitWalletTransaction);
-                wallet.setAmount(wallet.getAmount().subtract(debitWalletTransaction.getAmount()));
+                wallet.setBalance(wallet.getBalance().subtract(debitWalletTransaction.getAmount()));
                 walletRepository.save(wallet);
 
                 WalletTransaction creditWalletTransaction= WalletTransaction.builder()
@@ -90,7 +93,7 @@ public class WalletServiceImpl implements WalletService {
                         .wallet(wallet)
                         .build();
                 walletTransactionRepository.save(creditWalletTransaction);
-                wallet.setAmount(wallet.getAmount().add(creditWalletTransaction.getAmount()));
+                wallet.setBalance(wallet.getBalance().add(creditWalletTransaction.getAmount()));
 
                 walletRepository.save(wallet);
             }
@@ -98,14 +101,15 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public List<Wallet> allWallet() {
-        return walletRepository.findAll();
+    public List<WalletResponse> allWallet() {
+        return walletRepository.findAll().stream()
+                .map(walletMapper::mapToWalletResponse)
+                .toList();
     }
 
     @Override
-    public Wallet getById(String id) {
+    public WalletResponse getById(String id) {
         Optional<Wallet> walletOptional = walletRepository.findById(id);
-        return walletOptional.orElse(null);
-
+        return walletOptional.map(walletMapper::mapToWalletResponse).orElse(null);
     }
 }

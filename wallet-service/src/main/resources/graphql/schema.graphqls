@@ -1,11 +1,11 @@
 type Query {
-    userWallets: [Wallet],
-    walletById(id: String): Wallet
+    userWallets: [WalletResponse],
+    walletById(id: String): WalletResponse
 }
 
-type Wallet {
+type WalletResponse {
     id: String,
-    amount: Float,
+    balance: Float,
     createdAt: Float,
     currency: Currency,
     walletTransactions: [WalletTransaction]
@@ -23,5 +23,6 @@ type WalletTransaction {
     id: Float,
     amount: Float,
     timestamp: Float,
-    type: String
+    type: String,
+    wallet: WalletResponse
 }
