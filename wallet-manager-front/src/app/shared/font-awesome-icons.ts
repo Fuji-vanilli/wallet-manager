@@ -6,14 +6,13 @@ import {
     faPenToSquare,
  } from "@fortawesome/free-regular-svg-icons";
 import {
-  faAngleRight,
-  faHouse,
   faAnglesRight,
   faBook,
   faBookOpenReader,
   faCalendarDays,
   faCamera,
   faCreditCard,
+  faHouseChimney,
   faCartPlus,
   faCartShopping,
   faChalkboardTeacher,
@@ -56,7 +55,10 @@ import {
   faVenus,
   faWallet,
   IconDefinition,
-  faChartPie
+  faChartPie,
+  faHouse,
+  faChartLine,
+  faAngleDown
 } from "@fortawesome/free-solid-svg-icons";
 
 export const fontAwesomeIcons: IconDefinition[]= [
@@ -74,7 +76,9 @@ export const fontAwesomeIcons: IconDefinition[]= [
   faGraduationCap,
   faChalkboardTeacher,
   faChartPie,
-
+  faHouse,
+  faRightLeft,
+  faChartPie,
   faCalendarDays,
   faMoneyCheckDollar,
   faBookOpenReader,
@@ -93,6 +97,10 @@ export const fontAwesomeIcons: IconDefinition[]= [
   faTrashCan,
   faFileLines,
   faFolderPlus,
+  faRightFromBracket,
+  faCreditCard,
+  faChartLine,
+  faAngleDown,
   faFolderOpen,
   faTrash,
   faCalendarDays,
