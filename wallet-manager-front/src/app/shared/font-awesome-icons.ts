@@ -97,6 +97,7 @@ export const fontAwesomeIcons: IconDefinition[]= [
   faTrashCan,
   faFileLines,
   faFolderPlus,
+  faAnglesRight,
   faRightFromBracket,
   faCreditCard,
   faChartLine,
