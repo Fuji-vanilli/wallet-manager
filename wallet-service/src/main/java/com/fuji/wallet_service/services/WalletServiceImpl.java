@@ -110,8 +110,11 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public WalletResponse getById(String id) {
-        Optional<Wallet> walletOptional = walletRepository.findById(id);
-        return walletOptional.map(walletMapper::mapToWalletResponse).orElse(null);
+        Wallet wallet = walletRepository.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException(String.format("No wallet with the id %s", id))
+        );
+
+        return walletMapper.mapToWalletResponse(wallet);
     }
 
     @Override
@@ -122,7 +125,7 @@ public class WalletServiceImpl implements WalletService {
         wallet.setCreatedAt(new Date());
 
         Currency currency = currencyRepository.findByCode(request.currencyCode()).orElseThrow(
-                () -> new IllegalArgumentException(String.format("No currency with code %s", request.currencyCode()))
+                () -> new RuntimeException(String.format("No currency with code %s", request.currencyCode()))
         );
 
         wallet.setCurrency(currency);

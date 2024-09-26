@@ -13,7 +13,7 @@ public class WalletServiceApplication {
 		SpringApplication.run(WalletServiceApplication.class, args);
 	}
 
-	@Bean
+	//@Bean
 	CommandLineRunner commandLineRunner(WalletService walletService) {
 		return args -> {
 			walletService.loadCurrencies();
