@@ -2,8 +2,11 @@ package com.fuji.wallet_service.services;
 
 import com.fuji.wallet_service.entities.Currency;
 import com.fuji.wallet_service.entities.Wallet;
+import com.fuji.wallet_service.entities.WalletTransaction;
+import com.fuji.wallet_service.enums.TransactionType;
 import com.fuji.wallet_service.repositories.CurrencyRepository;
 import com.fuji.wallet_service.repositories.WalletRepository;
+import com.fuji.wallet_service.repositories.WalletTransactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,7 @@ import java.util.stream.Stream;
 public class WalletServiceImpl implements WalletService {
     private final WalletRepository walletRepository;
     private final CurrencyRepository currencyRepository;
+    private final WalletTransactionRepository walletTransactionRepository;
 
     @Override
     public void loadCurrencies() {
@@ -65,6 +69,17 @@ public class WalletServiceImpl implements WalletService {
 
             walletRepository.save(wallet);
             log.info("wallets added into the database");
+        });
+
+        walletRepository.findAll().forEach(wallet -> {
+            Random random= new Random();
+            WalletTransaction walletTransaction= WalletTransaction.builder()
+                    .amount(new BigDecimal(random.nextInt(1000, 2000)))
+                    .timestamp(new Date())
+                    .type(Math.random()> 0.5? TransactionType.CREDIT: TransactionType.DEBIT)
+                    .build();
+
+            walletTransactionRepository.save(walletTransaction);
         });
 
     }
