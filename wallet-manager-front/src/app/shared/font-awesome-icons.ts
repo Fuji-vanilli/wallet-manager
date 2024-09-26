@@ -2,6 +2,7 @@ import { faGoogleScholar } from "@fortawesome/free-brands-svg-icons";
 import { faBell, faCommentDots, faIdBadge, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import {
   faAngleRight,
+  faHouse,
   faAnglesRight,
   faBook,
   faBookOpenReader,
