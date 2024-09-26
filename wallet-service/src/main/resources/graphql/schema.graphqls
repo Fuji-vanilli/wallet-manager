@@ -1,0 +1,26 @@
+type Query {
+    userWallets: [Wallet]
+}
+
+type Wallet {
+    id: String,
+    amount: Float,
+    createdAt: Float,
+    currency: Currency,
+    walletTransaction: [WalletTransaction]
+}
+
+type Currency {
+    code: String,
+    name: String,
+    symbol: String,
+    salePrice: Float,
+    purchasePrice: Float
+}
+
+type WalletTransaction {
+    id: Float,
+    amount: Float,
+    timestamp: Float,
+    type: String
+}

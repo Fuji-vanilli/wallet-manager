@@ -73,15 +73,32 @@ public class WalletServiceImpl implements WalletService {
 
         walletRepository.findAll().forEach(wallet -> {
             for (int i= 0; i< 5; i++) {
-                WalletTransaction walletTransaction= WalletTransaction.builder()
+                WalletTransaction debitWalletTransaction= WalletTransaction.builder()
                         .amount(BigDecimal.valueOf(Math.random() * 1000))
                         .timestamp(new Date())
-                        .type(Math.random()> 0.5? TransactionType.CREDIT: TransactionType.DEBIT)
+                        .type(TransactionType.DEBIT)
                         .wallet(wallet)
                         .build();
+                walletTransactionRepository.save(debitWalletTransaction);
+                wallet.setAmount(wallet.getAmount().subtract(debitWalletTransaction.getAmount()));
+                walletRepository.save(wallet);
 
-                walletTransactionRepository.save(walletTransaction);
+                WalletTransaction creditWalletTransaction= WalletTransaction.builder()
+                        .amount(BigDecimal.valueOf(Math.random() * 1000))
+                        .timestamp(new Date())
+                        .type(TransactionType.CREDIT)
+                        .wallet(wallet)
+                        .build();
+                walletTransactionRepository.save(creditWalletTransaction);
+                wallet.setAmount(wallet.getAmount().add(creditWalletTransaction.getAmount()));
+
+                walletRepository.save(wallet);
             }
         });
+    }
+
+    @Override
+    public List<Wallet> allWallet() {
+        return walletRepository.findAll();
     }
 }
