@@ -11,7 +11,6 @@ public class WalletMapperImpl implements WalletMapper {
     public Wallet mapToWallet(WalletRequest request) {
         return Wallet.builder()
                 .balance(request.balance())
-                .currency(request.currency())
                 .userID(request.userID())
                 .build();
     }

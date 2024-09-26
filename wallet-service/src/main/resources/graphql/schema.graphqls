@@ -3,6 +3,16 @@ type Query {
     walletById(id: String): WalletResponse
 }
 
+type Mutation {
+    addWallet(request: WalletRequest): WalletResponse
+}
+
+input WalletRequest {
+    balance: Float,
+    userID: String,
+    currencyCode: String
+}
+
 type WalletResponse {
     id: String,
     balance: Float,

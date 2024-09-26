@@ -11,6 +11,6 @@ public record WalletRequest(
     @NotNull(message = "ID of user required")
     String userID,
     @NotNull(message = "currency of the wallet required")
-    Currency currency
+    String currencyCode
 ) {
 }

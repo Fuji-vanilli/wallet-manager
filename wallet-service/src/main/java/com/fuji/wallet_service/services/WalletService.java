@@ -1,5 +1,6 @@
 package com.fuji.wallet_service.services;
 
+import com.fuji.wallet_service.dto.WalletRequest;
 import com.fuji.wallet_service.dto.WalletResponse;
 import com.fuji.wallet_service.entities.Wallet;
 
@@ -9,4 +10,5 @@ public interface WalletService {
     void loadCurrencies();
     List<WalletResponse> allWallet();
     WalletResponse getById(String id);
+    WalletResponse add(WalletRequest request);
 }

@@ -1,5 +1,6 @@
 package com.fuji.wallet_service.services;
 
+import com.fuji.wallet_service.dto.WalletRequest;
 import com.fuji.wallet_service.dto.WalletResponse;
 import com.fuji.wallet_service.entities.Currency;
 import com.fuji.wallet_service.entities.Wallet;
@@ -111,5 +112,24 @@ public class WalletServiceImpl implements WalletService {
     public WalletResponse getById(String id) {
         Optional<Wallet> walletOptional = walletRepository.findById(id);
         return walletOptional.map(walletMapper::mapToWalletResponse).orElse(null);
+    }
+
+    @Override
+    public WalletResponse add(WalletRequest request) {
+        Wallet wallet = walletMapper.mapToWallet(request);
+
+        wallet.setId(UUID.randomUUID().toString());
+        wallet.setCreatedAt(new Date());
+
+        Currency currency = currencyRepository.findByCode(request.currencyCode()).orElseThrow(
+                () -> new IllegalArgumentException(String.format("No currency with code %s", request.currencyCode()))
+        );
+
+        wallet.setCurrency(currency);
+
+        walletRepository.save(wallet);
+        log.info("new wallet added successfully");
+
+        return walletMapper.mapToWalletResponse(wallet);
     }
 }

@@ -1,5 +1,7 @@
 package com.fuji.wallet_service.web;
 
+import com.fuji.wallet_service.dto.WalletRequest;
+import com.fuji.wallet_service.dto.WalletResponse;
 import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.services.WalletService;
 import lombok.RequiredArgsConstructor;
@@ -11,16 +13,22 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class WalletGraphQLController {
+public class WalletGraphQLController implements WalletGraphQLAPI {
     private final WalletService walletService;
 
-    @QueryMapping
-    public List<Wallet> userWallets() {
+    @Override
+    public List<WalletResponse> userWallets() {
         return walletService.allWallet();
     }
 
-    @QueryMapping
-    public Wallet walletById(@Argument String id) {
+    @Override
+    public WalletResponse walletById(String id) {
         return walletService.getById(id);
     }
+
+    @Override
+    public WalletResponse addWallet(WalletRequest request) {
+        return walletService.add(request);
+    }
+
 }
