@@ -18,6 +18,8 @@ public class WalletTransaction {
     private Long id;
     private BigDecimal amount;
     private Date timestamp;
+    private BigDecimal saleCurrencyPrice;
+    private BigDecimal purchaseCurrencyPrice;
     @ManyToOne
     private Wallet wallet;
     @Enumerated(EnumType.STRING)
