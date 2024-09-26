@@ -3,6 +3,7 @@ package com.fuji.wallet_service.web;
 import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.services.WalletService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -16,5 +17,10 @@ public class WalletGraphQLController {
     @QueryMapping
     public List<Wallet> userWallets() {
         return walletService.allWallet();
+    }
+
+    @QueryMapping
+    public Wallet walletById(@Argument String id) {
+        return walletService.getById(id);
     }
 }

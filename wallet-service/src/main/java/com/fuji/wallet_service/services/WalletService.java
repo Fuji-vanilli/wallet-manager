@@ -7,4 +7,5 @@ import java.util.List;
 public interface WalletService {
     void loadCurrencies();
     List<Wallet> allWallet();
+    Wallet getById(String id);
 }

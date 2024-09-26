@@ -101,4 +101,11 @@ public class WalletServiceImpl implements WalletService {
     public List<Wallet> allWallet() {
         return walletRepository.findAll();
     }
+
+    @Override
+    public Wallet getById(String id) {
+        Optional<Wallet> walletOptional = walletRepository.findById(id);
+        return walletOptional.orElse(null);
+
+    }
 }

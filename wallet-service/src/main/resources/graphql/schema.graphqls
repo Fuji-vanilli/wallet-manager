@@ -1,5 +1,6 @@
 type Query {
-    userWallets: [Wallet]
+    userWallets: [Wallet],
+    walletById(id: String): Wallet
 }
 
 type Wallet {
@@ -7,7 +8,7 @@ type Wallet {
     amount: Float,
     createdAt: Float,
     currency: Currency,
-    walletTransaction: [WalletTransaction]
+    walletTransactions: [WalletTransaction]
 }
 
 type Currency {
