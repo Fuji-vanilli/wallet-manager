@@ -72,15 +72,16 @@ public class WalletServiceImpl implements WalletService {
         });
 
         walletRepository.findAll().forEach(wallet -> {
-            Random random= new Random();
-            WalletTransaction walletTransaction= WalletTransaction.builder()
-                    .amount(new BigDecimal(random.nextInt(1000, 2000)))
-                    .timestamp(new Date())
-                    .type(Math.random()> 0.5? TransactionType.CREDIT: TransactionType.DEBIT)
-                    .build();
+            for (int i= 0; i< 5; i++) {
+                WalletTransaction walletTransaction= WalletTransaction.builder()
+                        .amount(BigDecimal.valueOf(Math.random() * 1000))
+                        .timestamp(new Date())
+                        .type(Math.random()> 0.5? TransactionType.CREDIT: TransactionType.DEBIT)
+                        .wallet(wallet)
+                        .build();
 
-            walletTransactionRepository.save(walletTransaction);
+                walletTransactionRepository.save(walletTransaction);
+            }
         });
-
     }
 }
