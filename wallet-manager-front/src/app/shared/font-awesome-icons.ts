@@ -1,5 +1,10 @@
 import { faGoogleScholar } from "@fortawesome/free-brands-svg-icons";
-import { faBell, faCommentDots, faIdBadge, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { 
+    faBell, 
+    faCommentDots, 
+    faIdBadge, 
+    faPenToSquare,
+ } from "@fortawesome/free-regular-svg-icons";
 import {
   faAngleRight,
   faHouse,
@@ -8,6 +13,7 @@ import {
   faBookOpenReader,
   faCalendarDays,
   faCamera,
+  faCreditCard,
   faCartPlus,
   faCartShopping,
   faChalkboardTeacher,
@@ -33,6 +39,7 @@ import {
   faPhoneVolume,
   faPlus,
   faRightFromBracket,
+  faRightLeft,
   faSchoolCircleCheck,
   faSchoolFlag,
   faSchoolLock,
@@ -48,7 +55,8 @@ import {
   faUserTie,
   faVenus,
   faWallet,
-  IconDefinition
+  IconDefinition,
+  faChartPie
 } from "@fortawesome/free-solid-svg-icons";
 
 export const fontAwesomeIcons: IconDefinition[]= [
@@ -65,6 +73,8 @@ export const fontAwesomeIcons: IconDefinition[]= [
   faSchoolFlag,
   faGraduationCap,
   faChalkboardTeacher,
+  faChartPie,
+
   faCalendarDays,
   faMoneyCheckDollar,
   faBookOpenReader,
