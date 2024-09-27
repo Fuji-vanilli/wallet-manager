@@ -58,7 +58,8 @@ import {
   faChartPie,
   faHouse,
   faChartLine,
-  faAngleDown
+  faAngleDown,
+  faAnglesLeft
 } from "@fortawesome/free-solid-svg-icons";
 
 export const fontAwesomeIcons: IconDefinition[]= [
@@ -98,6 +99,7 @@ export const fontAwesomeIcons: IconDefinition[]= [
   faFileLines,
   faFolderPlus,
   faAnglesRight,
+  faAnglesLeft,
   faRightFromBracket,
   faCreditCard,
   faChartLine,

@@ -8,12 +8,14 @@
     #sidebar {
         box-sizing: border-box;
         height: 100vh;
-        width: 250px;
-        padding: 5px .6em;
+        width: 220px;
+        padding: 5px .8em;
         border-right: 1px solid var(--line-clr);
         position: sticky;
         top: 0;
         align-self: start;
+        overflow: hidden;
+        transition: 0.5s ease;
 
         a, .dropdown-btn, .logo {
             border-radius: .5rem;
@@ -43,6 +45,11 @@
 
         ul {
             list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            height: 100%;
 
             li.active {
                 a {
@@ -63,6 +70,10 @@
                     background: none;
                     cursor: pointer;
                     color: var(--text-clr);
+
+                    fa-icon {
+                        transform: scaleX(-1);
+                    }
                 }
 
                 .dropdown-btn {
@@ -85,6 +96,8 @@
                     overflow: hidden;
                     visibility: hidden;
                     transition:  max-height 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
+               
+                    margin-left: 2em;
                 }
 
                 .sub-menu.show {
@@ -93,6 +106,10 @@
                     visibility: visible;
                 }
             }
+        }
+
+        ul > li:last-child {
+            margin-top: auto;
         }
     }
 
@@ -108,9 +125,15 @@
     }
 
     #sidebar.close {
-        #toggle-btn {
-            fa-icon {
-                rotate: 180deg;
+        max-width: 72px;
+
+        ul {
+            li {
+
+                .dropdown-btn span, a span {
+                    visibility: hidden;
+                    opacity: 0;
+                }
             }
         }
     }

@@ -8,10 +8,14 @@ import { Component } from '@angular/core';
 export class HomeComponent {
 
   isVisibleSubMenu: boolean= false;
+  isSidebarClose: boolean= false;
 
   toggleSubMenu() {
     this.isVisibleSubMenu= !this.isVisibleSubMenu;
   }
 
+  toggleSidebar() {
+    this.isSidebarClose= !this.isSidebarClose;
+  }
  
 }

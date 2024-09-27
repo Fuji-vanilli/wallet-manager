@@ -1,11 +1,11 @@
 <div id="main-container">
-    <nav id="sidebar">
+    <nav id="sidebar" [class.close]="isSidebarClose">
         <ul>
             <li>
                 <span class="logo">Poaketrako</span>
-                <button id="toggle-btn">
-                    <fa-icon [icon]="['fas', 'angles-right']"></fa-icon>
-                </button>
+                <button id="toggle-btn" (click)="toggleSidebar()">
+                    <fa-icon [icon]="['fas', 'angles-left']" class="rotate"></fa-icon>
+                </button> 
             </li>
             <li class="active">
                 <a href="">
