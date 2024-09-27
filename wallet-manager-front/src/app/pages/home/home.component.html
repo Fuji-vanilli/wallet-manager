@@ -4,7 +4,7 @@
             <li>
                 <span class="logo">Poaketrako</span>
                 <button id="toggle-btn" (click)="toggleSidebar()">
-                    <fa-icon [icon]="['fas', 'angles-left']" class="rotate"></fa-icon>
+                    <fa-icon [icon]="['fas', 'angles-left']" [class.rotate]="isSidebarClose"></fa-icon>
                 </button> 
             </li>
             <li class="active">
