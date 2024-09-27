@@ -8,31 +8,31 @@
                 </button> 
             </li>
             <li class="active">
-                <a routerLink="/admin/dashboard" >
+                <a routerLink="/admin/dashboard" routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">
                     <fa-icon [icon]="['fas', 'house']"></fa-icon>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="actives">
-                <a routerLink="/admin/account" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLinkActive="active" routerLink="/admin/account" [routerLinkActiveOptions]="{exact: true}">
                     <fa-icon [icon]="['fas', 'wallet']"></fa-icon>
                     <span>Account</span>
                 </a>
             </li>
             <li class="actives">
-                <a href="">
+                <a routerLinkActive="active" routerLink="/admin/transaction" [routerLinkActiveOptions]="{exact: true}">
                     <fa-icon [icon]="['fas', 'right-left']"></fa-icon>
                     <span>Transaction</span>
                 </a> 
             </li>
             <li class="actives">
-                <a href="">
+                <a routerLinkActive="active" routerLink="/admin/analytics" [routerLinkActiveOptions]="{exact: true}">
                     <fa-icon [icon]="['fas', 'chart-pie']"></fa-icon>
                     <span>Analytics</span>
                 </a>
             </li>
             <li class="actives">
-                <a href="">
+                <a routerLinkActive="active" routerLink="/admin/payment" [routerLinkActiveOptions]="{exact: true}">
                     <fa-icon [icon]="['fas', 'credit-card']"></fa-icon>
                     <span>Payment</span>
                 </a>
@@ -46,19 +46,19 @@
                 <ul class="sub-menu" [class.show]="isVisibleSubMenu">
                     <div>
                         <li class="actives">
-                            <a href=""><span>Balance</span></a>
+                            <a routerLinkActive="active" routerLink="/admin/activity/balance" [routerLinkActiveOptions]="{exact: true}"><span>Balance</span></a>
                         </li>
                         <li class="actives">
-                            <a href=""><span>Spending</span></a>
+                            <a routerLinkActive="active" routerLink="/admin/activity/spending" [routerLinkActiveOptions]="{exact: true}"><span>Spending</span></a>
                         </li>
                         <li class="actives">
-                            <a href=""><span>Refund</span></a>
+                            <a routerLinkActive="active" routerLink="/admin/activity/refund" [routerLinkActiveOptions]="{exact: true}"><span>Refund</span></a>
                         </li>
                     </div>
                 </ul>
             </li>
             <li class="actives">
-                <a href="">
+                <a routerLinkActive="active" routerLink="/admin/setting" [routerLinkActiveOptions]="{exact: true}">
                     <fa-icon [icon]="['fas', 'gear']"></fa-icon>
                     <span>Setting</span>
                 </a>

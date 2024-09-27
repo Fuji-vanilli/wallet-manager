@@ -10,6 +10,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { AccountComponent } from './pages/account/account.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TransactionComponent } from './pages/transaction/transaction.component';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { SettingComponent } from './pages/setting/setting.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { TransactionComponent } from './pages/transaction/transaction.component'
     HomeComponent,
     AccountComponent,
     DashboardComponent,
-    TransactionComponent
+    TransactionComponent,
+    AnalyticsComponent,
+    SettingComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
