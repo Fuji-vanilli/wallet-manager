@@ -13,6 +13,7 @@ import { TransactionComponent } from './pages/transaction/transaction.component'
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { SettingComponent } from './pages/setting/setting.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { NavbarComponent } from './pages/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PaymentComponent } from './pages/payment/payment.component';
     TransactionComponent,
     AnalyticsComponent,
     SettingComponent,
-    PaymentComponent
+    PaymentComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { faGoogleScholar } from "@fortawesome/free-brands-svg-icons";
 import { 
     faBell, 
+    faComment, 
     faCommentDots, 
     faIdBadge, 
     faPenToSquare,
@@ -100,6 +101,7 @@ export const fontAwesomeIcons: IconDefinition[]= [
   faFolderPlus,
   faAnglesRight,
   faAnglesLeft,
+  faComment,
   faRightFromBracket,
   faCreditCard,
   faChartLine,
