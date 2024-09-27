@@ -9,8 +9,11 @@
         box-sizing: border-box;
         height: 100vh;
         width: 250px;
-        padding: 5px 1em;
+        padding: 5px .6em;
         border-right: 1px solid var(--line-clr);
+        position: sticky;
+        top: 0;
+        align-self: start;
 
         a, .dropdown-btn, .logo {
             border-radius: .5rem;
@@ -20,6 +23,14 @@
             display: flex;
             align-items: center;
             gap: 1em;
+        }
+
+        a span, .dropdown-btn span {
+            flex-grow: 1;
+        }
+
+        a:hover, .dropdown-btn:hover {
+            background-color: var(--hover-clr);
         }
 
         ul {
@@ -43,6 +54,20 @@
                     text-align: left;
                     font: inherit;
                     cursor: pointer;
+                }
+
+                .sub-menu {
+                    display: grid;
+                    grid-template-rows: 0fr;
+                    transition: 0.5s all ase-in-out;
+
+                    > div {
+                        overflow: hidden;
+                    }
+                }
+
+                .sub-menu.show {
+                    grid-template-rows: 1fr;
                 }
             }
         }

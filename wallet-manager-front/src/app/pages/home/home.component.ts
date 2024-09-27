@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  isVisibleSubMenu: boolean= false;
+
+  toggleSubMenu(event: Event) {
+    const button= event.target as HTMLElement;
+    const submenu= button.nextElementSibling as HTMLElement;
+
+    if (submenu) {
+      submenu.classList.toggle('show');
+    }
+  }
+
+ 
 }

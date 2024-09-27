@@ -38,21 +38,23 @@
                 </a>
             </li>
             <li>
-                <button class="dropdown-btn">
+                <button class="dropdown-btn" (click)="toggleSubMenu($event)">
                     <fa-icon [icon]="['fas', 'chart-line']"></fa-icon>
                     <span>Activity</span>
                     <fa-icon [icon]="['fas', 'angle-down']"></fa-icon>
                 </button>
                 <ul class="sub-menu">
-                    <li class="actives">
-                        <a href=""><span>Balance</span></a>
-                    </li>
-                    <li class="actives">
-                        <a href=""><span>Spending</span></a>
-                    </li>
-                    <li class="actives">
-                        <a href=""><span>Refund</span></a>
-                    </li>
+                    <div>
+                        <li class="actives">
+                            <a href=""><span>Balance</span></a>
+                        </li>
+                        <li class="actives">
+                            <a href=""><span>Spending</span></a>
+                        </li>
+                        <li class="actives">
+                            <a href=""><span>Refund</span></a>
+                        </li>
+                    </div>
                 </ul>
             </li>
             <li class="actives">
@@ -70,6 +72,6 @@
         </ul>
     </nav>
     <main>
-        
+        <router-outlet></router-outlet>
     </main>
 </div>
