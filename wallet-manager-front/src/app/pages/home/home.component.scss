@@ -115,8 +115,14 @@
     #sidebar > ul > li:first-child {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         margin-top: 16px;
         margin-bottom: 16px;
+
+        img {
+            width: 40px;
+            height: 40px;
+        }
 
         .logo {
             font-weight: 600;
