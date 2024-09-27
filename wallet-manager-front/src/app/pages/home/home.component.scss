@@ -51,17 +51,15 @@
             justify-content: start;
             height: 100%;
 
-            li.active {
-                a {
-                    color: var(--accent-clr);
-                }
-
-                fa-icon {
-                    color: var(--accent-clr);
-                }
-            }
-
             li {
+                a.active {
+                    color: var(--accent-clr);
+    
+                    fa-icon {
+                        color: var(--accent-clr);
+                    }
+                }
+
                 #toggle-btn { 
                     margin-left: auto;
                     padding: 1em;

@@ -8,13 +8,13 @@
                 </button> 
             </li>
             <li class="active">
-                <a routerLink="admin/Dashboard">
+                <a routerLink="/admin/dashboard" >
                     <fa-icon [icon]="['fas', 'house']"></fa-icon>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="actives">
-                <a href="">
+                <a routerLink="/admin/account" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <fa-icon [icon]="['fas', 'wallet']"></fa-icon>
                     <span>Account</span>
                 </a>
