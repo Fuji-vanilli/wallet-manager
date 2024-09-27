@@ -29,8 +29,16 @@
             flex-grow: 1;
         }
 
-        a:hover, .dropdown-btn:hover {
+        a:hover {
             background-color: var(--hover-clr);
+        }
+
+        .dropdown-btn {
+            background: var(--hover-clr);
+
+            .rotate {
+                rotate: 180deg;
+            }
         }
 
         ul {
@@ -47,6 +55,16 @@
             }
 
             li {
+                #toggle-btn {
+                    margin-left: auto;
+                    padding: 1em;
+                    border: none;
+                    border-radius: .5em;
+                    background: none;
+                    cursor: pointer;
+                    color: var(--text-clr);
+                }
+
                 .dropdown-btn {
                     width: 100%;
                     background: none;
@@ -54,20 +72,25 @@
                     text-align: left;
                     font: inherit;
                     cursor: pointer;
-                }
 
-                .sub-menu {
-                    display: grid;
-                    grid-template-rows: 0fr;
-                    transition: 0.5s all ase-in-out;
-
-                    > div {
-                        overflow: hidden;
+                    fa-icon:last-child {
+                        transition: all 0.2s ease;
                     }
                 }
 
+
+                .sub-menu {
+                    max-height: 0px;
+                    opacity: 0;
+                    overflow: hidden;
+                    visibility: hidden;
+                    transition:  max-height 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
+                }
+
                 .sub-menu.show {
-                    grid-template-rows: 1fr;
+                    max-height: 700px;
+                    opacity: 1;
+                    visibility: visible;
                 }
             }
         }
@@ -81,6 +104,14 @@
 
         .logo {
             font-weight: 600;
+        }
+    }
+
+    #sidebar.close {
+        #toggle-btn {
+            fa-icon {
+                rotate: 180deg;
+            }
         }
     }
 
