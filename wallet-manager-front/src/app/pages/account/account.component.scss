@@ -1,0 +1,42 @@
+* {
+    margin-left: 16px;
+}
+
+.main-container {
+    .left {
+        margin-top: 16px;
+        padding: 0;
+
+        header {
+            margin-bottom: 16px;
+
+            h2 {
+                padding: 0;
+            }
+
+            span {
+                color: var(--secondary-text-clr);
+                font-size: 16px;
+            }
+        }
+
+        .card {
+            padding: 14px;
+
+            .balance {
+                color: var(--secondary-text-clr);
+                margin-bottom: 14px;
+            }
+
+            .amount {
+                font-size: 25px;
+                font-weight: 600;
+            }
+
+            .notification {
+                color: var(--secondary-text-clr);
+                font-size: 12px;
+            }
+        }
+    }
+}
