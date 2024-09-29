@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  mysql-db:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: WALLET-DB
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - wallet_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql-db
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - wallet_network
+
+volumes:
+  mysql_data:
+
+networks:
+  wallet_network:
