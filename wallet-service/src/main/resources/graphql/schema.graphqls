@@ -17,6 +17,7 @@ input WalletRequest {
 input WalletTransactionRequest {
     amount: Float,
     type: String,
+    walletID: String,
     walletDestinationID: String
 }
 
