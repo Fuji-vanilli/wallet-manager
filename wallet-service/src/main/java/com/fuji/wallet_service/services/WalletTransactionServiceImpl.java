@@ -3,6 +3,7 @@ package com.fuji.wallet_service.services;
 import com.fuji.wallet_service.dto.WalletTransactionRequest;
 import com.fuji.wallet_service.dto.WalletTransactionResponse;
 import com.fuji.wallet_service.entities.Wallet;
+import com.fuji.wallet_service.entities.WalletTransaction;
 import com.fuji.wallet_service.mapper.WalletTransactionMapper;
 import com.fuji.wallet_service.repositories.WalletRepository;
 import com.fuji.wallet_service.repositories.WalletTransactionRepository;
@@ -11,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -36,10 +39,26 @@ public class WalletTransactionServiceImpl implements WalletTransactionService{
                     throw new IllegalArgumentException(String.format("no wallet for id %s into the database!!!", request.walletDestinationID()));
                 }
         );
+        BigDecimal updateBalanceSource = walletSource.getBalance().subtract(request.amount());
+        walletSource.setBalance(updateBalanceSource);
 
+        BigDecimal updateBalanceDestination= request.amount()
+                .multiply(walletSource.getCurrency().getSalePrice().divide(walletDestination.getCurrency().getSalePrice(), RoundingMode.HALF_UP));
+        walletDestination.setBalance(updateBalanceDestination);
 
+        walletRepository.save(walletSource);
+        walletRepository.save(walletDestination);
 
-        return null;
+        WalletTransaction walletTransaction = walletTransactionMapper.mapToWalletTransaction(request);
+        walletTransaction.setWallet(walletSource);
+        walletTransaction.setTimestamp(new Date());
+        walletTransaction.setPurchaseCurrencyPrice(walletSource.getCurrency().getPurchasePrice());
+        walletTransaction.setSaleCurrencyPrice(walletSource.getCurrency().getSalePrice());
+
+        walletTransactionRepository.save(walletTransaction);
+
+        log.info("transaction proceed successfully!");
+        return walletTransactionMapper.mapToWalletTransactionResponse(walletTransaction);
     }
 
     @Override
