@@ -12,6 +12,7 @@ public class WalletTransactionMapperImpl implements WalletTransactionMapper{
         return WalletTransaction.builder()
                 .amount(request.amount())
                 .type(request.type())
+                .walletDestinationID(request.walletDestinationID())
                 .build();
     }
 

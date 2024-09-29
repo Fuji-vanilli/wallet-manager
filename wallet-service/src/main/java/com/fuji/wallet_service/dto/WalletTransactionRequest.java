@@ -11,6 +11,8 @@ public record WalletTransactionRequest(
         @NotNull(message = "type of transaction required!")
         TransactionType type,
         @NotNull(message = "wallet ID required")
-        String walletID
+        String walletID,
+        @NotNull(message = "wallet destination id required!")
+        String walletDestinationID
 ) {
 }
