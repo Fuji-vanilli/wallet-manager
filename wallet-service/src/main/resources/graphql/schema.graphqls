@@ -21,7 +21,14 @@ input WalletTransactionRequest {
 }
 
 type WalletTransactionResponse {
-
+    id: Float,
+    timestamp: String,
+    amount: Float,
+    saleCurrencyPrice: Float,
+    purchaseCurrencyPrice: Float,
+    walletDestinationID: String,
+    wallet: WalletResponse,
+    type: String
 }
 
 type WalletResponse {
