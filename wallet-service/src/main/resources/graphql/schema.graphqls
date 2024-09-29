@@ -5,13 +5,23 @@ type Query {
 
 type Mutation {
     addWallet(request: WalletRequest): WalletResponse,
-
+    proceed(request: WalletTransactionRequest): WalletTransactionResponse
 }
 
 input WalletRequest {
     balance: Float,
     userID: String,
     currencyCode: String
+}
+
+input WalletTransactionRequest {
+    amount: Float,
+    type: String,
+    walletDestinationID: String
+}
+
+type WalletTransactionResponse {
+
 }
 
 type WalletResponse {

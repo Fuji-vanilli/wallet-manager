@@ -24,6 +24,7 @@ public class WalletTransactionMapperImpl implements WalletTransactionMapper{
                 walletTransaction.getAmount(),
                 walletTransaction.getSaleCurrencyPrice(),
                 walletTransaction.getPurchaseCurrencyPrice(),
+                walletTransaction.getWalletDestinationID(),
                 walletTransaction.getWallet(),
                 walletTransaction.getType()
         );

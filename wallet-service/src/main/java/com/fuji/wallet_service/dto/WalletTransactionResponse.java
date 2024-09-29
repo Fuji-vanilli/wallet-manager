@@ -12,6 +12,7 @@ public record WalletTransactionResponse(
         BigDecimal amount,
         BigDecimal saleCurrencyPrice,
         BigDecimal purchaseCurrencyPrice,
+        String walletDestinationID,
         Wallet wallet,
         TransactionType type
 ) {
