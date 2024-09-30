@@ -103,22 +103,6 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public List<WalletResponse> allWallet() {
-        return walletRepository.findAll().stream()
-                .map(walletMapper::mapToWalletResponse)
-                .toList();
-    }
-
-    @Override
-    public WalletResponse getById(String id) {
-        Wallet wallet = walletRepository.findById(id).orElseThrow(
-                ()-> new IllegalArgumentException(String.format("No wallet with the id %s", id))
-        );
-
-        return walletMapper.mapToWalletResponse(wallet);
-    }
-
-    @Override
     public WalletResponse add(WalletRequest request) {
         Wallet wallet = walletMapper.mapToWallet(request);
 
@@ -133,6 +117,22 @@ public class WalletServiceImpl implements WalletService {
 
         walletRepository.save(wallet);
         log.info("new wallet added successfully");
+
+        return walletMapper.mapToWalletResponse(wallet);
+    }
+
+    @Override
+    public List<WalletResponse> allWallet() {
+        return walletRepository.findAll().stream()
+                .map(walletMapper::mapToWalletResponse)
+                .toList();
+    }
+
+    @Override
+    public WalletResponse getById(String id) {
+        Wallet wallet = walletRepository.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException(String.format("No wallet with the id %s", id))
+        );
 
         return walletMapper.mapToWalletResponse(wallet);
     }
