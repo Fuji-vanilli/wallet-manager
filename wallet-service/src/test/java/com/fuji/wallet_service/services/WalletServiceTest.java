@@ -16,9 +16,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -102,10 +101,36 @@ class WalletServiceTest {
 
     @Test
     public void shouldGetAllWallet() {
-        when(walletRepository.findAll()).thenReturn(List.of());
+        Wallet wallet1= Wallet.builder()
+                .id(UUID.randomUUID().toString())
+                .createdAt(new Date())
+                .balance(BigDecimal.valueOf(1000))
+                .userID("USER-1")
+                .build();
 
-        List<Wallet> wallets = walletRepository.findAll();
+        Wallet wallet2= Wallet.builder()
+                .id(UUID.randomUUID().toString())
+                .createdAt(new Date())
+                .balance(BigDecimal.valueOf(3000))
+                .userID("USER-2")
+                .build();
+
+        when(walletRepository.findAll()).thenReturn(Arrays.asList(wallet1, wallet2));
+
+        WalletResponse response1 = new WalletResponse(wallet1.toString(), null, null, "USER-1", null);
+        WalletResponse response2 = new WalletResponse(wallet2.toString(), null, null, "USER-2", null);
+
+        when(walletMapper.mapToWalletResponse(wallet1)).thenReturn(response1);
+        when(walletMapper.mapToWalletResponse(wallet2)).thenReturn(response2);
+
+        List<WalletResponse> wallets = walletService.allWallet();
+
+        assertThat(wallets.size()).isEqualTo(2);
+        assertThat(wallets.get(0)).isEqualTo(response1);
+        assertThat(wallets.get(1)).isEqualTo(response2);
 
         verify(walletRepository, times(1)).findAll();
+        verify(walletMapper, times(1)).mapToWalletResponse(wallet1);
+        verify(walletMapper, times(1)).mapToWalletResponse(wallet2);
     }
 }
