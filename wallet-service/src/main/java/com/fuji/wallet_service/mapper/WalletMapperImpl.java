@@ -5,10 +5,15 @@ import com.fuji.wallet_service.dto.WalletResponse;
 import com.fuji.wallet_service.entities.Wallet;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Objects;
+
 @Configuration
 public class WalletMapperImpl implements WalletMapper {
     @Override
     public Wallet mapToWallet(WalletRequest request) {
+        if (Objects.isNull(request)) {
+            throw new NullPointerException("wallet request should be not null");
+        }
         return Wallet.builder()
                 .balance(request.balance())
                 .userID(request.userID())

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class WalletMapperImplTest {
@@ -58,5 +59,11 @@ class WalletMapperImplTest {
         assertThat(wallet.getUserID()).isEqualTo(walletResponse.userID());
         assertThat(wallet.getCurrency()).isEqualTo(walletResponse.currency());
         assertThat(wallet.getId()).isEqualTo(walletResponse.id());
+    }
+
+    @Test
+    public void shouldThrowNullPointerExceptionWhenRequestIsNull() {
+        var exception= assertThrows(NullPointerException.class, ()-> mapper.mapToWallet(null));
+        assertThat("wallet request should be not null").isEqualTo(exception.getMessage());
     }
 }
