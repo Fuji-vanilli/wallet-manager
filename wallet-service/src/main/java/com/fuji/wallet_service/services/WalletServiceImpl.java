@@ -6,6 +6,7 @@ import com.fuji.wallet_service.entities.Currency;
 import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.entities.WalletTransaction;
 import com.fuji.wallet_service.enums.TransactionType;
+import com.fuji.wallet_service.exception.CurrencyNotFoundException;
 import com.fuji.wallet_service.mapper.WalletMapper;
 import com.fuji.wallet_service.repositories.CurrencyRepository;
 import com.fuji.wallet_service.repositories.WalletRepository;
@@ -125,7 +126,7 @@ public class WalletServiceImpl implements WalletService {
         wallet.setCreatedAt(new Date());
 
         Currency currency = currencyRepository.findByCode(request.currencyCode()).orElseThrow(
-                () -> new RuntimeException(String.format("No currency with code %s", request.currencyCode()))
+                () -> new CurrencyNotFoundException(String.format("No currency with code %s", request.currencyCode()))
         );
 
         wallet.setCurrency(currency);

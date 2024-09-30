@@ -4,6 +4,7 @@ import com.fuji.wallet_service.mapper.WalletMapper;
 import com.fuji.wallet_service.repositories.WalletRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class WalletServiceTest {
 
     @InjectMocks
-    private WalletService walletService;
+    private WalletServiceImpl walletService;
     @Mock
     private WalletMapper walletMapper;
     @Mock
@@ -28,5 +29,10 @@ class WalletServiceTest {
     @AfterEach
     void tearDown() throws Exception {
         autoCloseable.close();
+    }
+
+    @Test
+    public void testAddWallet_success() {
+
     }
 }
