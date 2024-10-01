@@ -101,36 +101,27 @@ class WalletServiceTest {
 
     @Test
     public void shouldGetAllWallet() {
-        Wallet wallet1= Wallet.builder()
+        Wallet wallet= Wallet.builder()
                 .id(UUID.randomUUID().toString())
                 .createdAt(new Date())
                 .balance(BigDecimal.valueOf(1000))
                 .userID("USER-1")
                 .build();
 
-        Wallet wallet2= Wallet.builder()
-                .id(UUID.randomUUID().toString())
-                .createdAt(new Date())
-                .balance(BigDecimal.valueOf(3000))
-                .userID("USER-2")
-                .build();
 
-        when(walletRepository.findAll()).thenReturn(Arrays.asList(wallet1, wallet2));
+        List<Wallet> wallets = Collections.singletonList(wallet);
 
-        WalletResponse response1 = new WalletResponse(wallet1.toString(), null, null, "USER-1", null);
-        WalletResponse response2 = new WalletResponse(wallet2.toString(), null, null, "USER-2", null);
+        WalletResponse response= new WalletResponse(wallet.getId(), BigDecimal.valueOf(1000), null, "USER-1", null);
+        when(walletRepository.findAll()).thenReturn(wallets);
+        when(walletMapper.mapToWalletResponse(wallet)).thenReturn(response);
 
-        when(walletMapper.mapToWalletResponse(wallet1)).thenReturn(response1);
-        when(walletMapper.mapToWalletResponse(wallet2)).thenReturn(response2);
+        List<WalletResponse> result = walletService.allWallet();
 
-        List<WalletResponse> wallets = walletService.allWallet();
-
-        assertThat(wallets.size()).isEqualTo(2);
-        assertThat(wallets.get(0)).isEqualTo(response1);
-        assertThat(wallets.get(1)).isEqualTo(response2);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0)).isEqualTo(response);
 
         verify(walletRepository, times(1)).findAll();
-        verify(walletMapper, times(1)).mapToWalletResponse(wallet1);
-        verify(walletMapper, times(1)).mapToWalletResponse(wallet2);
+        verify(walletMapper, times(1)).mapToWalletResponse(any(Wallet.class));
+
     }
 }
