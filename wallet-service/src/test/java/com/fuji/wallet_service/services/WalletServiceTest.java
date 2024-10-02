@@ -5,6 +5,7 @@ import com.fuji.wallet_service.dto.WalletResponse;
 import com.fuji.wallet_service.entities.Currency;
 import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.exception.CurrencyNotFoundException;
+import com.fuji.wallet_service.exception.WalletNotFoundException;
 import com.fuji.wallet_service.mapper.WalletMapper;
 import com.fuji.wallet_service.repositories.CurrencyRepository;
 import com.fuji.wallet_service.repositories.WalletRepository;
@@ -97,6 +98,39 @@ class WalletServiceTest {
         verify(currencyRepository, times(1)).findByCode("EUR");
         verify(walletRepository, never()).save(any(Wallet.class));
 
+    }
+
+    @Test
+    public void shouldGetWalletById() {
+        Wallet wallet = Wallet.builder()
+                .id(UUID.randomUUID().toString())
+                .balance(BigDecimal.valueOf(2000))
+                .userID("USER-1")
+                .createdAt(new Date())
+                .build();
+
+        when(walletRepository.findById(wallet.getId())).thenReturn(Optional.of(wallet));
+        WalletResponse response= new WalletResponse(wallet.getId(), BigDecimal.valueOf(2000), null, "USER-1", null);
+        when(walletMapper.mapToWalletResponse(wallet)).thenReturn(response);
+
+        WalletResponse result = walletService.getById(wallet.getId());
+
+        assertThat(result).isEqualTo(response);
+
+        verify(walletRepository, times(1)).findById(wallet.getId());
+    }
+
+    @Test
+    public void testGetWallet_WalletNotFound() {
+        final String walletID= "ID-1";
+
+        when(walletRepository.findById(walletID)).thenReturn(Optional.empty());
+        var walletNotFoundException = assertThrows(WalletNotFoundException.class, () -> walletService.getById(walletID));
+
+        assertThat(walletNotFoundException.getMessage()).isEqualTo("No wallet with the id "+walletID);
+
+        verify(walletRepository, times(1)).findById(walletID);
+        verify(walletMapper, never()).mapToWalletResponse(any());
     }
 
     @Test

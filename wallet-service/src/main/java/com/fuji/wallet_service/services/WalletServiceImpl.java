@@ -7,6 +7,7 @@ import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.entities.WalletTransaction;
 import com.fuji.wallet_service.enums.TransactionType;
 import com.fuji.wallet_service.exception.CurrencyNotFoundException;
+import com.fuji.wallet_service.exception.WalletNotFoundException;
 import com.fuji.wallet_service.mapper.WalletMapper;
 import com.fuji.wallet_service.repositories.CurrencyRepository;
 import com.fuji.wallet_service.repositories.WalletRepository;
@@ -131,7 +132,7 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public WalletResponse getById(String id) {
         Wallet wallet = walletRepository.findById(id).orElseThrow(
-                ()-> new IllegalArgumentException(String.format("No wallet with the id %s", id))
+                ()-> new WalletNotFoundException(String.format("No wallet with the id %s", id))
         );
 
         return walletMapper.mapToWalletResponse(wallet);
