@@ -4,6 +4,7 @@ import com.fuji.wallet_service.dto.WalletTransactionRequest;
 import com.fuji.wallet_service.dto.WalletTransactionResponse;
 import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.entities.WalletTransaction;
+import com.fuji.wallet_service.exception.WalletNotFoundException;
 import com.fuji.wallet_service.mapper.WalletTransactionMapper;
 import com.fuji.wallet_service.repositories.WalletRepository;
 import com.fuji.wallet_service.repositories.WalletTransactionRepository;
@@ -29,16 +30,13 @@ public class WalletTransactionServiceImpl implements WalletTransactionService{
     @Override
     public WalletTransactionResponse proceed(WalletTransactionRequest request) {
         Wallet walletSource = walletRepository.findById(request.walletID()).orElseThrow(
-                () -> {
-                    throw new IllegalArgumentException(String.format("no wallet for id %s into the database!!!", request.walletID()));
-                }
+                () -> new WalletNotFoundException(String.format("no wallet for id %s into the database!!!", request.walletID()))
         );
 
         Wallet walletDestination = walletRepository.findById(request.walletDestinationID()).orElseThrow(
-                () -> {
-                    throw new IllegalArgumentException(String.format("no wallet for id %s into the database!!!", request.walletDestinationID()));
-                }
+                () -> new WalletNotFoundException(String.format("no wallet for id %s into the database!!!", request.walletDestinationID()))
         );
+
         BigDecimal updateBalanceSource = walletSource.getBalance().subtract(request.amount());
         walletSource.setBalance(updateBalanceSource);
 
