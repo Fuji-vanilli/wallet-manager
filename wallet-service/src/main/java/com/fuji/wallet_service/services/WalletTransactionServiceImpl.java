@@ -41,7 +41,7 @@ public class WalletTransactionServiceImpl implements WalletTransactionService{
         walletSource.setBalance(updateBalanceSource);
 
         BigDecimal updateBalanceDestination= walletDestination.getBalance().add(request.amount()
-                .multiply(walletSource.getCurrency().getSalePrice().divide(walletDestination.getCurrency().getSalePrice(), RoundingMode.HALF_UP)));
+                .multiply(walletSource.getCurrency().getSalePrice().divide(walletDestination.getCurrency().getPurchasePrice(), RoundingMode.HALF_UP)));
         walletDestination.setBalance(updateBalanceDestination);
 
         walletRepository.save(walletSource);
