@@ -14,4 +14,9 @@ public class WalletTransactionGraphQLController implements WalletTransactionGrap
     public WalletTransactionResponse proceed(WalletTransactionRequest request) {
         return walletTransactionService.proceed(request);
     }
+
+    @Override
+    public WalletTransactionResponse getById(Long id) {
+        return walletTransactionService.getById(id);
+    }
 }

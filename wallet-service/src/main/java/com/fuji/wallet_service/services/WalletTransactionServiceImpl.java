@@ -5,6 +5,7 @@ import com.fuji.wallet_service.dto.WalletTransactionResponse;
 import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.entities.WalletTransaction;
 import com.fuji.wallet_service.exception.WalletNotFoundException;
+import com.fuji.wallet_service.exception.WalletTransactionNotFound;
 import com.fuji.wallet_service.mapper.WalletTransactionMapper;
 import com.fuji.wallet_service.repositories.WalletRepository;
 import com.fuji.wallet_service.repositories.WalletTransactionRepository;
@@ -61,7 +62,11 @@ public class WalletTransactionServiceImpl implements WalletTransactionService{
 
     @Override
     public WalletTransactionResponse getById(Long id) {
-        return null;
+        WalletTransaction walletTransaction = walletTransactionRepository.findById(id).orElseThrow(
+                () -> new WalletTransactionNotFound(String.format("no wallet transaction with the id: %d", id))
+        );
+
+        return walletTransactionMapper.mapToWalletTransactionResponse(walletTransaction);
     }
 
     @Override

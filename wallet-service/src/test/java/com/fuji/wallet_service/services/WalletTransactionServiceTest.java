@@ -148,4 +148,13 @@ class WalletTransactionServiceTest {
         verify(walletTransactionRepository, never()).save(any(WalletTransaction.class));
         verify(walletTransactionMapper, never()).mapToWalletTransactionResponse(any(WalletTransaction.class));
     }
+
+    @Test
+    public void testGetWalletTransaction_Success() {
+        final Long walletTransactionID= 1L;
+        WalletTransaction.builder()
+                .id(walletTransactionID)
+                .amount(BigDecimal.valueOf(1000))
+                .build();
+    }
 }
