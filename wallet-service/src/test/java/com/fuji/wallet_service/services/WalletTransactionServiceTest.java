@@ -8,6 +8,7 @@ import com.fuji.wallet_service.entities.Wallet;
 import com.fuji.wallet_service.entities.WalletTransaction;
 import com.fuji.wallet_service.enums.TransactionType;
 import com.fuji.wallet_service.exception.WalletNotFoundException;
+import com.fuji.wallet_service.exception.WalletTransactionNotFound;
 import com.fuji.wallet_service.mapper.WalletMapper;
 import com.fuji.wallet_service.mapper.WalletTransactionMapper;
 import com.fuji.wallet_service.repositories.WalletRepository;
@@ -19,11 +20,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -150,13 +153,37 @@ class WalletTransactionServiceTest {
     }
 
     @Test
-    public void shouldGetWalletTransaction_Success() {
+    public void getById_ShouldReturnWalletTransaction_WhenTransactionExists() {
         final Long walletTransactionID= 1L;
-        WalletTransaction.builder()
+        WalletTransaction walletTransaction = WalletTransaction.builder()
                 .id(walletTransactionID)
                 .amount(BigDecimal.valueOf(1000))
                 .build();
+        WalletTransactionResponse response= new WalletTransactionResponse(1L, new Date(), BigDecimal.valueOf(1000), null, null, null, null, TransactionType.DEBIT);
 
+        when(walletTransactionRepository.findById(walletTransactionID)).thenReturn(Optional.of(walletTransaction));
+        when(walletTransactionMapper.mapToWalletTransactionResponse(walletTransaction)).thenReturn(response);
 
+        WalletTransactionResponse result = walletTransactionService.getById(walletTransactionID);
+
+        assertThat(result).isNotNull();
+        assertThat(result).isEqualTo(response);
+
+        verify(walletTransactionRepository, times(1)).findById(walletTransactionID);
+        verify(walletTransactionMapper, times(1)).mapToWalletTransactionResponse(walletTransaction);
+    }
+
+    @Test
+    public void getById_ShouldThrowException_WhenTransactionDoesNotExists() {
+        final long walletTransactionID= 1;
+
+        when(walletTransactionRepository.findById(walletTransactionID)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(()-> walletTransactionService.getById(walletTransactionID))
+                .isInstanceOf(WalletTransactionNotFound.class)
+                        .hasMessage("no wallet transaction with the id: "+walletTransactionID);
+
+        verify(walletTransactionRepository, times(1)).findById(walletTransactionID);
+        verify(walletTransactionMapper, never()).mapToWalletTransactionResponse(any(WalletTransaction.class));
     }
 }

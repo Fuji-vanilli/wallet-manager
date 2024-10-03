@@ -76,6 +76,8 @@ public class WalletTransactionServiceImpl implements WalletTransactionService{
 
     @Override
     public List<WalletTransactionResponse> getAll() {
-        return List.of();
+        return walletTransactionRepository.findAll().stream()
+                .map(walletTransactionMapper::mapToWalletTransactionResponse)
+                .toList();
     }
 }
