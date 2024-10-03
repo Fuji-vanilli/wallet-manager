@@ -150,11 +150,13 @@ class WalletTransactionServiceTest {
     }
 
     @Test
-    public void testGetWalletTransaction_Success() {
+    public void shouldGetWalletTransaction_Success() {
         final Long walletTransactionID= 1L;
         WalletTransaction.builder()
                 .id(walletTransactionID)
                 .amount(BigDecimal.valueOf(1000))
                 .build();
+
+
     }
 }
