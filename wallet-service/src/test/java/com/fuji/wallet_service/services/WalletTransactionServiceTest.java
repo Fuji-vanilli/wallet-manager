@@ -22,7 +22,9 @@ import org.mockito.MockitoAnnotations;
 
 import javax.swing.text.html.Option;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -185,5 +187,25 @@ class WalletTransactionServiceTest {
 
         verify(walletTransactionRepository, times(1)).findById(walletTransactionID);
         verify(walletTransactionMapper, never()).mapToWalletTransactionResponse(any(WalletTransaction.class));
+    }
+
+    @Test
+    public void testGetAllWalletTransaction_success() {
+        WalletTransaction walletTransaction = WalletTransaction.builder()
+                .id(1L)
+                .amount(BigDecimal.valueOf(1000))
+                .build();
+        WalletTransactionResponse response= new WalletTransactionResponse(1L, null, BigDecimal.valueOf(1000), null, null, null, null, null);
+
+        when(walletTransactionRepository.findAll()).thenReturn(Collections.singletonList(walletTransaction));
+        when(walletTransactionMapper.mapToWalletTransactionResponse(walletTransaction)).thenReturn(response);
+
+        List<WalletTransactionResponse> walletTransactions = walletTransactionService.getAll();
+
+        assertThat(walletTransactions.size()).isEqualTo(1);
+        assertThat(walletTransactions.get(0)).isEqualTo(response);
+
+        verify(walletTransactionRepository, times(1)).findAll();
+        verify(walletTransactionMapper, times(1)).mapToWalletTransactionResponse(any(WalletTransaction.class));
     }
 }
