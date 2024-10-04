@@ -2,6 +2,7 @@ type Query {
     userWallets: [WalletResponse],
     walletById(id: String): WalletResponse
     getByID(id: Float): WalletTransactionResponse
+    getAll: [WalletTransactionResponse]
 }
 
 type Mutation {
