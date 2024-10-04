@@ -6,6 +6,8 @@ import com.fuji.wallet_service.services.WalletTransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class WalletTransactionGraphQLController implements WalletTransactionGraphQLAPI {
@@ -18,5 +20,10 @@ public class WalletTransactionGraphQLController implements WalletTransactionGrap
     @Override
     public WalletTransactionResponse getById(Long id) {
         return walletTransactionService.getById(id);
+    }
+
+    @Override
+    public List<WalletTransactionResponse> getAll() {
+        return walletTransactionService.getAll();
     }
 }
