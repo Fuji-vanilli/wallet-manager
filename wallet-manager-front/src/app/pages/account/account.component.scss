@@ -42,6 +42,19 @@
     }
 
     .right {
-        background-color: red;
+        margin: 16px 0;
+
+        .card {
+            margin-right: 16px;
+
+            .deposit {
+                margin: 16px;
+                border: none;
+                background-color: var(--accent-clr);
+                color: var(--text-100);
+                border-radius: 8px;
+                padding: 8px 14px;
+            }
+        }
     }
 }
