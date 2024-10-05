@@ -1,10 +1,10 @@
 * {
-    margin-left: 16px;
+    margin-left: 8px;
 }
 
 .main-container {
     .left {
-        margin-top: 16px;
+        margin: 16px 0;
         padding: 0;
 
         header {
@@ -22,6 +22,7 @@
 
         .card {
             padding: 14px;
+            margin: 0;
 
             .balance {
                 color: var(--secondary-text-clr);
@@ -38,5 +39,9 @@
                 font-size: 12px;
             }
         }
+    }
+
+    .right {
+        background-color: red;
     }
 }
