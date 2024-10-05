@@ -39,6 +39,26 @@
                 font-size: 12px;
             }
         }
+
+        .transaction {
+            table {
+                tr {
+                    td {
+                        margin: 16px;
+                        img {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                        }
+
+                        .name {
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .right {
