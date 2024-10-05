@@ -41,10 +41,12 @@
         }
 
         .transaction {
+            margin-top: 14px;
             table {
                 tr {
                     td {
-                        margin: 16px;
+                        margin: 12px;
+
                         img {
                             width: 40px;
                             height: 40px;
@@ -54,6 +56,11 @@
                         .name {
                             display: flex;
                             flex-direction: column;
+
+                            span {
+                                color: var(--secondary-text-clr);
+                                font-size: 13px;
+                            }
                         }
                     }
                 }
